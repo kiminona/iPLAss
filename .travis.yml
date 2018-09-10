@@ -1,0 +1,26 @@
+dist: trusty
+language: java
+jdk:
+  # - oraclejdk8
+  # - openjdk7
+  - oraclejdk9
+  # - oraclejdk10
+  # - oraclejdk11
+  
+env:
+  - TOMCAT_VERSION=8.5.32
+
+before_script:
+  - echo "before_script..."
+script:
+  - cd lib/smartgwt
+  - wget https://www.smartclient.com/builds/SmartGWT/12.0p/LGPL/latest/smartgwt.jar
+  - wget https://www.smartclient.com/builds/SmartGWT/12.0p/LGPL/latest/smartgwt-skins.jar
+  - cd ../..
+  - chmod u+x ./gradlew
+  - ./gradlew --version
+  - ./gradlew build --stacktrace
+
+after_success:
+  - echo "success"
+  
